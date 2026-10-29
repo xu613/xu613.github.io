@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>xu613 · 作品</title>
+        <meta
+            name="description"
+            content="xu613 的作品集：微信小游戏《水一箭》。"
+        />
+        <link rel="icon" href="avatar.png" />
+        <style>
+            :root {
+                --bg: #f5f6fa;
+                --fg: #16181d;
+                --muted: #6b7280;
+                --card: #ffffff;
+                --card-media: #f1f3f9;
+                --border: rgba(17, 24, 39, 0.08);
+                --accent: #4f46e5;
+                --accent-fg: #ffffff;
+                --shadow:
+                    0 1px 2px rgba(16, 24, 40, 0.06),
+                    0 16px 32px -18px rgba(16, 24, 40, 0.35);
+                --shadow-hover:
+                    0 2px 4px rgba(16, 24, 40, 0.08),
+                    0 24px 48px -20px rgba(16, 24, 40, 0.45);
+            }
+
+            @media (prefers-color-scheme: dark) {
+                :root {
+                    --bg: #0d0f14;
+                    --fg: #f2f3f7;
+                    --muted: #9aa1af;
+                    --card: #171a21;
+                    --card-media: #12151b;
+                    --border: rgba(255, 255, 255, 0.09);
+                    --accent: #8b8bfa;
+                    --accent-fg: #12131a;
+                    --shadow:
+                        0 1px 2px rgba(0, 0, 0, 0.5),
+                        0 16px 32px -18px rgba(0, 0, 0, 0.8);
+                    --shadow-hover:
+                        0 2px 4px rgba(0, 0, 0, 0.5),
+                        0 24px 48px -20px rgba(0, 0, 0, 0.9);
+                }
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            html {
+                -webkit-text-size-adjust: 100%;
+            }
+
+            body {
+                margin: 0;
+                padding: 0 20px 64px;
+                background: var(--bg);
+                color: var(--fg);
+                font-family:
+                    system-ui,
+                    -apple-system,
+                    "Segoe UI",
+                    "PingFang SC",
+                    "Hiragino Sans GB",
+                    "Microsoft YaHei",
+                    sans-serif;
+                line-height: 1.6;
+                -webkit-font-smoothing: antialiased;
+            }
+
+            body::before {
+                content: "";
+                position: fixed;
+                inset: 0;
+                z-index: -1;
+                pointer-events: none;
+                background:
+                    radial-gradient(
+                        50rem 30rem at 15% -10%,
+                        rgba(99, 102, 241, 0.16),
+                        transparent 70%
+                    ),
+                    radial-gradient(
+                        40rem 28rem at 95% 0%,
+                        rgba(236, 72, 153, 0.12),
+                        transparent 70%
+                    );
+            }
+
+            a {
+                color: inherit;
+            }
+
+            .wrap {
+                max-width: 920px;
+                margin: 0 auto;
+            }
+
+            /* ---------- Hero ---------- */
+            .hero {
+                padding: 72px 0 40px;
+            }
+
+            .avatar {
+                display: block;
+                width: 88px;
+                height: 88px;
+                border-radius: 50%;
+                object-fit: cover;
+                background: var(--card-media);
+                box-shadow:
+                    0 0 0 4px var(--card),
+                    0 0 0 5px var(--border),
+                    var(--shadow);
+            }
+
+            h1 {
+                margin: 20px 0 6px;
+                font-size: clamp(1.7rem, 5vw, 2.2rem);
+                letter-spacing: -0.02em;
+                line-height: 1.2;
+            }
+
+            .tagline {
+                margin: 0;
+                color: var(--muted);
+                font-size: 1rem;
+            }
+
+            .hero-links {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                margin-top: 20px;
+            }
+
+            .hero-links a {
+                padding: 6px 14px;
+                border: 1px solid var(--border);
+                border-radius: 999px;
+                font-size: 0.875rem;
+                text-decoration: none;
+                color: var(--muted);
+                background: var(--card);
+                transition:
+                    color 0.15s ease,
+                    border-color 0.15s ease,
+                    transform 0.15s ease;
+            }
+
+            .hero-links a:hover {
+                color: var(--fg);
+                border-color: var(--accent);
+                transform: translateY(-1px);
+            }
+
+            /* ---------- Section ---------- */
+            .section-title {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                margin: 8px 0 24px;
+                font-size: 0.8125rem;
+                font-weight: 600;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: var(--muted);
+            }
+
+            .section-title::after {
+                content: "";
+                flex: 1;
+                height: 1px;
+                background: var(--border);
+            }
+
+            /* ---------- Works ---------- */
+            .works {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+                gap: 20px;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            .card {
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+                background: var(--card);
+                border: 1px solid var(--border);
+                border-radius: 16px;
+                box-shadow: var(--shadow);
+                transition:
+                    transform 0.2s ease,
+                    box-shadow 0.2s ease;
+            }
+
+            .card:hover {
+                transform: translateY(-3px);
+                box-shadow: var(--shadow-hover);
+            }
+
+            .card-media {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                aspect-ratio: 16 / 11;
+                overflow: hidden;
+                background: var(--card-media);
+                border-bottom: 1px solid var(--border);
+                text-decoration: none;
+            }
+
+            .card-media img {
+                position: absolute;
+                inset: 14px;
+                width: calc(100% - 28px);
+                height: calc(100% - 28px);
+                object-fit: contain;
+                padding: 8px;
+                border-radius: 10px;
+                /* 白底保证小程序码扫描时对比度足够 */
+                background: #fff;
+            }
+
+            [data-zoom] {
+                cursor: zoom-in;
+            }
+
+            .card-body {
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+                gap: 6px;
+                padding: 18px 20px 20px;
+            }
+
+            .card-body h3 {
+                margin: 0;
+                font-size: 1.0625rem;
+                line-height: 1.4;
+            }
+
+            .card-body p {
+                margin: 0;
+                color: var(--muted);
+                font-size: 0.875rem;
+            }
+
+            .card-actions {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                margin-top: auto;
+                padding-top: 14px;
+            }
+
+            .btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                padding: 8px 16px;
+                border: 1px solid transparent;
+                border-radius: 999px;
+                background: var(--accent);
+                color: var(--accent-fg);
+                font-size: 0.875rem;
+                font-weight: 600;
+                text-decoration: none;
+                transition:
+                    filter 0.15s ease,
+                    transform 0.15s ease;
+            }
+
+            .btn:hover {
+                filter: brightness(1.08);
+                transform: translateY(-1px);
+            }
+
+            .btn.ghost {
+                background: transparent;
+                border-color: var(--border);
+                color: var(--fg);
+                font-weight: 500;
+            }
+
+            .btn.ghost:hover {
+                border-color: var(--accent);
+                filter: none;
+            }
+
+            a:focus-visible,
+            .btn:focus-visible {
+                outline: 2px solid var(--accent);
+                outline-offset: 3px;
+            }
+
+            /* ---------- Zoom dialog ---------- */
+            dialog {
+                padding: 16px;
+                border: 1px solid var(--border);
+                border-radius: 20px;
+                background: var(--card);
+                color: var(--fg);
+                max-width: min(92vw, 460px);
+                box-shadow: 0 32px 64px -24px rgba(0, 0, 0, 0.6);
+                cursor: zoom-out;
+            }
+
+            dialog figure {
+                margin: 0;
+            }
+
+            dialog::backdrop {
+                background: rgba(10, 12, 18, 0.6);
+                backdrop-filter: blur(4px);
+            }
+
+            dialog img {
+                display: block;
+                width: 100%;
+                height: auto;
+                border-radius: 12px;
+                background: #fff;
+            }
+
+            dialog figcaption {
+                margin-top: 12px;
+                color: var(--muted);
+                font-size: 0.8125rem;
+                text-align: center;
+            }
+
+            /* ---------- Footer ---------- */
+            footer {
+                margin-top: 56px;
+                padding-top: 24px;
+                border-top: 1px solid var(--border);
+                color: var(--muted);
+                font-size: 0.8125rem;
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                * {
+                    transition: none !important;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .hero {
+                    padding-top: 48px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="wrap">
+            <header class="hero">
+                <img
+                    class="avatar"
+                    src="avatar.png"
+                    alt="xu613 的头像"
+                    width="88"
+                    height="88"
+                />
+                <h1>xu613</h1>
+                <p class="tagline">独立开发者 · 小游戏 / Web</p>
+                <nav class="hero-links">
+                    <a
+                        href="https://github.com/xu613"
+                        target="_blank"
+                        rel="noopener"
+                        >GitHub</a
+                    >
+                    <a href="mailto:375364180@qq.com">Email</a>
+                </nav>
+            </header>
+
+            <main>
+                <h2 class="section-title">作品</h2>
+                <ul class="works">
+                    <li class="card">
+                        <a
+                            class="card-media"
+                            href="minigames/微信小游戏-水一箭.jpg"
+                            data-zoom
+                            title="点击查看小程序码大图"
+                        >
+                            <img
+                                src="minigames/微信小游戏-水一箭.jpg"
+                                alt="《水一箭》微信小游戏小程序码"
+                                loading="lazy"
+                            />
+                        </a>
+                        <div class="card-body">
+                            <h3>水一箭</h3>
+                            <p>
+                                微信小游戏 ·
+                                微信扫一扫或长按识别小程序码即可开玩。
+                            </p>
+                            <div class="card-actions">
+                                <a
+                                    class="btn"
+                                    href="show/archerygame/index.html"
+                                    >在线试玩</a
+                                >
+                                <a
+                                    class="btn ghost"
+                                    href="minigames/微信小游戏-水一箭.jpg"
+                                    data-zoom
+                                    >小程序码</a
+                                >
+                            </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </main>
+
+            <footer>
+                © <span id="year">2026</span> xu613 · 由 GitHub Pages 托管
+            </footer>
+        </div>
+
+        <dialog id="zoom-dialog" aria-label="小程序码大图">
+            <figure>
+                <img id="zoom-img" alt="" />
+                <figcaption>微信扫一扫 / 长按识别，体验《水一箭》</figcaption>
+            </figure>
+        </dialog>
+
+        <script>
+            document.getElementById("year").textContent =
+                new Date().getFullYear();
+
+            const dialog = document.getElementById("zoom-dialog");
+            const zoomImg = document.getElementById("zoom-img");
+
+            document
+                .querySelectorAll("[data-zoom]")
+                .forEach(function (trigger) {
+                    trigger.addEventListener("click", function (event) {
+                        event.preventDefault();
+                        zoomImg.src = trigger.getAttribute("href");
+                        zoomImg.alt =
+                            trigger.querySelector("img")?.alt || "作品图片";
+                        if (typeof dialog.showModal === "function") {
+                            dialog.showModal();
+                        } else {
+                            window.open(
+                                trigger.getAttribute("href"),
+                                "_blank",
+                                "noopener",
+                            );
+                        }
+                    });
+                });
+
+            dialog.addEventListener("click", function () {
+                dialog.close();
+            });
+
+            dialog.addEventListener("close", function () {
+                zoomImg.removeAttribute("src");
+            });
+        </script>
+    </body>
+</html>
